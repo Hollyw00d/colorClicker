@@ -10,16 +10,22 @@ function random_color()
     };
     return color;
 }
-$(document).ready(function(){
-    $('#large_box').click(function(){
-        alert('you clicked the big box!');
-        //comment this out when you figure out
-        //what event.stopPropagation is used for!
-    })
-    $('.side_box').click(function(event){
+$(function(){
+    $("#large_box").click(function(event){
         event.stopPropagation();
-    })
-    $('.middle_box').click(function(event){
+        $(this).css("background-color", random_color());
+        $(this).children().css("background-color", random_color());
+    });
+
+
+    $(".middle_box").click(function(event){
         event.stopPropagation();
-    })
+        $(this).parent("#large_box").css("background-color", random_color());
+    });
+
+    $(".side_box").click(function(event){
+        event.stopPropagation();
+        $(this).siblings().css("background-color", random_color());
+    });
+
 });
